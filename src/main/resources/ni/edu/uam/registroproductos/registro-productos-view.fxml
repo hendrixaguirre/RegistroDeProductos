@@ -56,7 +56,7 @@
           <TableColumn fx:id="colNombre" prefWidth="165.0" text="Nombre" />
             <TableColumn fx:id="colCategoria" prefWidth="177.0" text="Categoría" />
             <TableColumn fx:id="colPrecio" prefWidth="92.0" text="Precio" />
-            <TableColumn fx:id="colFecha" prefWidth="149.0" text="Fecha de ingreso" />
+            <TableColumn prefWidth="149.0" text="Fecha de ingreso" />
         </columns>
       </TableView>
    </children>
