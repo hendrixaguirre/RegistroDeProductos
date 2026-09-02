@@ -36,14 +36,11 @@
       </GridPane>
       <HBox layoutX="128.0" layoutY="204.0" prefHeight="41.0" prefWidth="200.0" spacing="8.0">
          <children>
-            <Button fx:id="btnAgregar" mnemonicParsing="false" text="Agregar" />
-            <Button fx:id="btnActualizar" mnemonicParsing="false" text="Actualizar" />
-            <Button fx:id="btnLimpiar" mnemonicParsing="false" text="Limpiar" />
+            <Button fx:id="btnAgregar" mnemonicParsing="false" onAction="#agregarProducto" text="Agregar" />
+            <Button fx:id="btnActualizar" mnemonicParsing="false" onAction="#actualizarProducto" text="Actualizar" />
+            <Button fx:id="btnLimpiar" mnemonicParsing="false" onAction="#limpiarControles" text="Limpiar" />
          </children>
       </HBox>
-      <Label layoutX="373.0" layoutY="79.0" text="Imagen del producto:" />
-      <Button fx:id="btnImagen" layoutX="380.0" layoutY="254.0" mnemonicParsing="false" text="Seleccionar imagen" />
-      <ImageView fx:id="ivImagen" fitHeight="150.0" fitWidth="329.0" layoutX="372.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" />
       <Separator layoutX="20.0" layoutY="297.0" prefHeight="17.0" prefWidth="684.0" />
       <Label layoutX="20.0" layoutY="321.0" text="Productos registrados">
          <font>
@@ -59,5 +56,12 @@
             <TableColumn prefWidth="149.0" text="Fecha de ingreso" />
         </columns>
       </TableView>
+      <VBox layoutX="370.0" layoutY="80.0" prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <Label text="Imagen del producto:" />
+            <ImageView fx:id="ivImagen" fitHeight="150.0" fitWidth="329.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="selectImage" mnemonicParsing="false" onAction="#guardarImagen" text="Seleccionar imagen" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
