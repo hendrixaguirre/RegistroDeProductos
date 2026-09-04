@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
@@ -29,7 +30,7 @@ public class ProductoController {
     private ImageView imgProducto;
 
     @FXML
-    private TableView<Producto> tvProductos;
+    private TableView<Producto> tblProductos;
 
     @FXML
     private TableColumn<Producto, Integer> colId;
@@ -65,9 +66,9 @@ public class ProductoController {
         colNombre.setCellValueFactory(new PropertyValueFactory<>("Nombre"));
         colCategoria.setCellValueFactory(new PropertyValueFactory<>("Categoria"));
         colPrecio.setCellValueFactory(new PropertyValueFactory<>("Precio"));
-        colFecha.setCellValueFactory(new PropertyValueFactory<>("Fecha"));
+        colFecha.setCellValueFactory(new PropertyValueFactory<>("FechaRegistro"));
 
-        tvProductos.setItems(productos);
+        tblProductos.setItems(productos);
 
     }
 
@@ -81,7 +82,7 @@ public class ProductoController {
     }
 
     private void configureTableSelection(){
-        tvProductos.getSelectionModel().selectedItemProperty().addListener((observable, oldvalue, newvalue) -> {
+        tblProductos.getSelectionModel().selectedItemProperty().addListener((observable, oldvalue, newvalue) -> {
             if (newvalue != null) {
                 loadProductoIntoForm(newvalue);
             }
@@ -94,23 +95,32 @@ public class ProductoController {
         txtPrecio.setText(String.valueOf(producto.getPrecio()));
         dpFecha.setValue(producto.getFechaRegistro());
         selectedImagePath = producto.getImagePath();
-        // Agregar el método de showImage
+        showImage(selectedImagePath);
     }
 
-    private boolean validateForm(){
+    private Double validateForm(){
         String nombre = txtNombre.getText().trim();
         String categoria = txtCategoria.getText().trim();
-        String precio = txtPrecio.getText().trim();
+        String precioText = txtPrecio.getText().trim().replace(',', '.');
 
-        if(nombre.isEmpty() || categoria.isEmpty() || precio.isEmpty()){
+        if(nombre.isEmpty() || categoria.isEmpty() || precioText.isEmpty()){
             showAlert(
                     Alert.AlertType.WARNING,
                     "Datos incompletos",
                     "Completa todos los campos para continuar"
             );
-            return false;
+            return null;
         }
-        return true;
+        try {
+            double precio = Double.parseDouble(precioText);
+            if (!Double.isFinite(precio) || precio <= 0) {
+                throw new NumberFormatException();
+            }
+            return precio;
+        } catch (NumberFormatException exception) {
+            showAlert(Alert.AlertType.WARNING, "Precio inválido", "Ingresa un precio numérico mayor que cero.");
+            return null;
+        }
     }
 
     private void showAlert(Alert.AlertType type, String title, String message){
@@ -123,7 +133,8 @@ public class ProductoController {
 
     @FXML
     private void agregarProducto(){
-        if(!validateForm()){
+        Double precio = validateForm();
+        if(precio == null){
             return;
         }
 
@@ -154,5 +165,29 @@ public class ProductoController {
             selectedImagePath = selectedFile.toURI().toString();
             showImage(selectedImagePath);
         }
+    }
+
+    private void showImage(String imagePath) {
+        if (selectedImagePath == null) {
+            imgProducto.setImage(null);
+            return;
+        }
+        Image image = new Image(selectedImagePath, 180, 150, true, true);
+        imgProducto.setImage(image);
+    }
+
+    public void actualizarProducto(){
+
+    }
+
+    public void limpiarControles(){
+        txtNombre.clear();
+        txtCategoria.clear();
+        txtPrecio.clear();
+        dpFecha.setValue(LocalDate.now());
+        selectedImagePath = null;
+        imgProducto.setImage(null);
+        tblProductos.getSelectionModel().clearSelection();
+        txtNombre.requestFocus();
     }
 }

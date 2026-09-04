@@ -47,20 +47,20 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <TableView fx:id="tvRegistros" layoutX="20.0" layoutY="353.0" prefHeight="232.0" prefWidth="684.0">
+      <TableView fx:id="tblProductos" layoutX="20.0" layoutY="353.0" prefHeight="232.0" prefWidth="684.0">
         <columns>
-          <TableColumn fx:id="colID" prefWidth="65.0" text="ID" />
+          <TableColumn fx:id="colId" prefWidth="65.0" text="ID" />
           <TableColumn fx:id="colNombre" prefWidth="165.0" text="Nombre" />
             <TableColumn fx:id="colCategoria" prefWidth="177.0" text="Categoría" />
             <TableColumn fx:id="colPrecio" prefWidth="92.0" text="Precio" />
-            <TableColumn prefWidth="149.0" text="Fecha de ingreso" />
+            <TableColumn fx:id="colFecha" prefWidth="149.0" text="Fecha de ingreso" />
         </columns>
       </TableView>
       <VBox layoutX="370.0" layoutY="80.0" prefHeight="200.0" prefWidth="100.0">
          <children>
             <Label text="Imagen del producto:" />
-            <ImageView fx:id="ivImagen" fitHeight="150.0" fitWidth="329.0" pickOnBounds="true" preserveRatio="true" />
-            <Button fx:id="selectImage" mnemonicParsing="false" onAction="#guardarImagen" text="Seleccionar imagen" />
+            <ImageView fx:id="imgProducto" fitHeight="150.0" fitWidth="329.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="selectImage" mnemonicParsing="false" onAction="#selectImage" text="Seleccionar imagen" />
          </children>
       </VBox>
    </children>

@@ -7,4 +7,5 @@ module ni.edu.uam.registroproductos {
     exports ni.edu.uam.registroproductos;
     exports ni.edu.uam.registroproductos.controller;
     opens ni.edu.uam.registroproductos.controller to javafx.fxml;
+    opens ni.edu.uam.registroproductos.model to javafx.base;
 }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ni.edu.uam.registroproductos.controller.MenuPrincipalController">
+   <children>
+      <MenuBar fx:id="mnb" prefHeight="25.0" prefWidth="600.0">
+        <menus>
+          <Menu fx:id="mnuCatalago" mnemonicParsing="false" text="Catálogos">
+            <items>
+              <MenuItem fx:id="miProducto" mnemonicParsing="false" onAction="#abrirMenuProductos" text="Producto" />
+                  <MenuItem fx:id="miClientes" mnemonicParsing="false" onAction="#abrirMenuClientes" text="Clientes" />
+            </items>
+          </Menu>
+          <Menu fx:id="mnuReportes" mnemonicParsing="false" text="Reportes">
+            <items>
+              <MenuItem fx:id="miReporte1" mnemonicParsing="false" onAction="#abrirMenuReporte" text="Reporte #1" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Salir" />
+        </menus>
+      </MenuBar>
+   </children>
+</AnchorPane>
